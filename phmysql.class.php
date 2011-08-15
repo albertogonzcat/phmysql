@@ -291,6 +291,21 @@ class phmysql
         return $this->doQuery($sql);
     }
 
+    function delete($id, $table, $_where = '', $_keyField = 'id') {
+        if (empty($id) || empty($_keyField)) {
+            $emsg = "Mysql delete: Incomplete arguments to delete data";
+            $this->debug($emsg, "Error");
+            return false;
+        }
+        $sql = "DELETE FROM $table WHERE";
+        if (!empty($_where)) {
+            $sql .= "$_where AND";
+        }
+        $sql .= " $_keyField = '$id'";
+        $this->doQuery($sql);
+
+    }
+
     /** *=*=***********************************************************************
      * Debug functions
      */
