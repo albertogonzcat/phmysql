@@ -19,6 +19,9 @@ class phmysql
     // Force the error messages?
     public $forceShow = false;
 
+    // Last ID inserted
+    private $last_id = 0;
+
     // Debug variables.
     public $debug = false;
     private $_DEBUG = Array("--- phmysql: Debug log Start --- \n");
@@ -92,6 +95,7 @@ class phmysql
             $emsg = "Mysql query: ($_query) performed.";
             $this->debug($emsg, "Message");
         }
+        $this->last_id = $this->insertLastId($link);
         $this->closeConnection($link);
         return $query;
     }
@@ -228,6 +232,15 @@ class phmysql
         return $return;
     }
 
+    private function insertLastId($link) {
+        $last_id = mysql_insert_id($link);
+        return $last_id;
+    }
+
+    function getLastId() {
+        return $this->last_id;
+    }
+
     /**
      * phmysql::insert()
      *
@@ -302,8 +315,7 @@ class phmysql
             $sql .= "$_where AND";
         }
         $sql .= " $_keyField = '$id'";
-        $this->doQuery($sql);
-
+        return $this->doQuery($sql);
     }
 
     /** *=*=***********************************************************************
