@@ -1,0 +1,36 @@
+       .__                               .__
+______ |  |__   _____ ___.__. ___________|  |
+\____ \|  |  \ /     <   |  |/  ___/ ____/  |
+|  |_> >   Y  \  Y Y  \___  |\___ < <_|  |  |__
+|   __/|___|  /__|_|  / ____/____  >__   |____/
+|__|        \/      \/\/         \/   |__|
+===============================================================================
+
+Suggestions, issues, comments, etc are really appreciated.
+
+y php class to connect and do basic MySQL statements, and not being redeveloping
+all that stuff from zero everytime I need to develop some website and/or script.
+
+-----= Usage:
+
+$phmysql = new phmysql;
+$phmysql->setConnection("localhost", "root", "pass", "phmysql");
+$clients_number = $phmysql->getNumRows("SELECT * FROM clients");
+$new_clients = $phmysql->getArray("SELECT * FROM clients WHERE not_checked = 1");
+$phmysql->showDebug(false, true);
+
+-----= Log example:
+
+--- phmysql: Debug log Start ---
+[Message] Set connection parameters
+[Message] Mysql connection started
+[Message] Mysql query: (SELECT * FROM items WHERE name LIKE '%kromede\'s%') performed.
+[Message] Mysql connection closed
+[Message] Mysql connection started
+[Message] Mysql num rows: (result: 10) performed.
+[Message] Mysql connection closed
+[Message] Mysql connection started
+[Message] Mysql query: (SELECT * FROM items WHERE name LIKE '%kromedees%') performed.
+[Message] Mysql connection closed
+[Error] Mysql fetch array: (SELECT * FROM items WHERE name LIKE '%kromedees%') No rows to get data from.
+--- phmysql: Debug log End ---
