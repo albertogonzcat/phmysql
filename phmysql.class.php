@@ -232,7 +232,7 @@ class phmysql
         return $return;
     }
 
-    private function insertLastId($link) {
+    private function getInsertLastId($link) {
         $last_id = mysql_insert_id($link);
         return $last_id;
     }
