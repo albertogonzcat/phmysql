@@ -95,7 +95,7 @@ class phmysql
             $emsg = "Mysql query: ($_query) performed.";
             $this->debug($emsg, "Message");
         }
-        $this->last_id = $this->insertLastId($link);
+        $this->last_id = $this->getInsertLastId($link);
         $this->closeConnection($link);
         return $query;
     }
